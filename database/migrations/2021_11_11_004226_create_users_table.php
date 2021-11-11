@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePockets extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTablePockets extends Migration
      */
     public function up()
     {
-        Schema::create('pockets', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('name', 50);
-            $table->integer('balance');
-            $table->boolean('is_primary');
+            $table->string('username', 16)->unique();
+            $table->string('password');
+            $table->boolean('is_admin');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateTablePockets extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pockets');
+        Schema::dropIfExists('users');
     }
 }
